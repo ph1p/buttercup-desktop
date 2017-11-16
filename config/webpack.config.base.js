@@ -1,3 +1,5 @@
+const HappyPack = require('happypack');
+const threadPool = HappyPack.ThreadPool({ size: 4 });
 const { join } = require('path');
 
 module.exports = {
@@ -5,7 +7,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: 'happypack/loader?id=js',
         include: [
           join(__dirname, '../src'),
           join(__dirname, '../node_modules/buttercup-generator')
@@ -13,12 +15,12 @@ module.exports = {
       },
       {
         test: /\.(svg|png|ttf|woff|woff2)$/,
-        use: 'file-loader',
+        use: 'happypack/loader?id=file',
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: 'happypack/loader?id=css'
       }
     ]
   },
@@ -33,6 +35,25 @@ module.exports = {
       locales: join(__dirname, '../locales')
     }
   },
-  plugins: [],
+  plugins: [
+    new HappyPack({
+      id: 'css',
+      verbose: false,
+      loaders: ['style-loader', 'css-loader'],
+      threadPool
+    }),
+    new HappyPack({
+      id: 'js',
+      verbose: false,
+      loaders: ['babel-loader?cacheDirectory'],
+      threadPool
+    }),
+    new HappyPack({
+      id: 'file',
+      verbose: false,
+      loaders: ['file-loader'],
+      threadPool
+    })
+  ],
   externals: ['buttercup-importer', 'zxcvbn', 'dropbox', 'webdav', 'conf']
 };

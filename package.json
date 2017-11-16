@@ -180,6 +180,7 @@
     "grunt-contrib-jade": "^0.15.0",
     "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
+    "happypack": "^4.0.0",
     "humanize": "^0.0.9",
     "husky": "^0.14.3",
     "is-error": "^2.2.1",

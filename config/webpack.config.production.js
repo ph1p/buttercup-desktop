@@ -4,6 +4,8 @@ const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
+const HappyPack = require('happypack');
+const threadPool = HappyPack.ThreadPool({ size: 4 });
 
 module.exports = merge(baseConfig, {
   devtool: false,
@@ -22,39 +24,16 @@ module.exports = merge(baseConfig, {
       {
         test: /\.global\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
+          fallback: 'happypack/loader?id=css',
+          use: ['happypack/loader?id=sass']
         })
       },
 
       {
         test: /^((?!\.global).)*\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-                minimize: true
-              }
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
+          fallback: 'happypack/loader?id=css',
+          use: ['happypack/loader?id=sass']
         })
       }
     ]
@@ -94,6 +73,20 @@ module.exports = merge(baseConfig, {
     new ExtractTextPlugin({
       filename: '[name].css',
       allChunks: true
+    }),
+    new HappyPack({
+      id: 'css',
+      verbose: false,
+      loaders: ['style-loader'],
+      threadPool
+    }),
+    new HappyPack({
+      id: 'sass',
+      verbose: false,
+      loaders: [
+        'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&minimize=true!sass-loader'
+      ],
+      threadPool
     })
   ],
 
