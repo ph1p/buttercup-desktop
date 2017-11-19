@@ -19,8 +19,6 @@
       background-color: $black-20;
       .trash {
         opacity: 1;
-        transition: all .3s;
-        transform: translate(0, -50%);
       }
     }
 
@@ -29,7 +27,8 @@
       top: 50%;
       right: 12px;
       opacity: 0;
-      transform: translate(15px, -50%);
+      transition: all .3s;
+      transform: translate(0, -50%);
       cursor: pointer;
       z-index: 2;
     }
