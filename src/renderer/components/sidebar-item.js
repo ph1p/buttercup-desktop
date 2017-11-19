@@ -17,7 +17,8 @@ const Wrapper = styled.li`
   color: #fff;
   background-color: ${props =>
     props.active ? 'rgba(255, 255, 255, .1)' : 'transparent'};
-  padding: var(--spacing-half) 0;
+  padding: var(--spacing-half)
+    ${props => (!props.condenced ? 'var(--spacing-one)' : 0)};
   cursor: ${props => (props.locked ? 'pointer' : 'default')} !important;
 
   .status {
@@ -235,6 +236,7 @@ class SidebarItem extends Component {
         active={active}
         onContextMenu={this.handleContextMenu}
         onClick={onClick}
+        condenced={condenced}
       >
         <Avatar
           color={color || '#000000'}

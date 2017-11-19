@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import AddArchiveButton from '../containers/add-archive-button';
-import EmptyView from './empty-view';
 import BaseColumn from './column';
 import SidebarItem from './sidebar-item';
 

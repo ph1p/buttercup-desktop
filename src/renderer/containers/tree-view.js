@@ -13,7 +13,7 @@ export default connect(
   state => ({
     groups: getGroups(state),
     getEntries: groupId =>
-      entryTools.loadEntries(state.currentArchive, groupId),
+      entryTools.loadEntries(state.currentArchive, groupId) || [],
     sortMode: state.groups.sortMode,
     expandedKeys: getExpandedKeys(state),
     selectedKeys: [getCurrentGroupId(state)]

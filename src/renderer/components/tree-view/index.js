@@ -96,7 +96,7 @@ class TreeView extends Component {
     const { id: groupId, isTrash, depth } = node;
     const { intl } = this.props;
 
-    // Prevent righ click from propagation to parent
+    // Prevent right click from propagation to parent
     e.stopPropagation();
 
     if (isTrash) {

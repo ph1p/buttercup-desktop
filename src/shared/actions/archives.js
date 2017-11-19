@@ -46,6 +46,7 @@ export const removeArchive = payload => () => {
 };
 
 export const lockArchive = payload => dispatch => {
+  console.log(payload);
   return lockArchiveInArchiveManager(payload).then(archiveId => {
     dispatch(lockArchiveInStore(archiveId));
     dispatch(setCurrentArchive(null));
