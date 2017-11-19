@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { isOSX, isHighSierra } from '../../shared/utils/platform';
 import AddArchiveButton from '../containers/add-archive-button';
 import EmptyView from './empty-view';
 import BaseColumn from './column';
@@ -33,14 +32,6 @@ class RecentFiles extends Component {
     onLockArchive: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired
   };
-
-  renderEmptyState() {
-    return (
-      <div>
-        <EmptyView caption="No archives yet." />
-      </div>
-    );
-  }
 
   render() {
     const { archives, currentArchiveId, condenced } = this.props;

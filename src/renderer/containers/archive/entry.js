@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { initialize, isDirty } from 'redux-form';
 import Entry from '../../components/archive/entry';
-import { getCurrentEntry } from '../../../shared/selectors';
+import { getCurrentEntry, getEntries } from '../../../shared/selectors';
 import { filterEmptyEntryValues } from '../../../shared/buttercup/entries.js';
 import {
   updateEntry,
@@ -14,7 +14,8 @@ export default connect(
   state => ({
     entry: getCurrentEntry(state),
     mode: state.entries.mode,
-    dirty: isDirty('editForm')(state)
+    dirty: isDirty('editForm')(state),
+    entries: getEntries(state)
   }),
   {
     onEditEntry: updateEntry,

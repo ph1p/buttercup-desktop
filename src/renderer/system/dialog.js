@@ -27,8 +27,7 @@ export function showDialog(message, type = 'error') {
   if (message instanceof Error) {
     message = message.message;
   }
-  dialog.showMessageBox({
-    detail: message,
+  dialog.showMessageBox(currentWindow, {
     type,
     message
   });

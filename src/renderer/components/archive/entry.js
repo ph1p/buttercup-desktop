@@ -7,13 +7,14 @@ import { Button } from '@buttercup/ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
-import EmptyView from '../empty-view';
+import EmptyView from '../../containers/empty-view';
 import bench from '../../styles/img/bench.svg';
 import EntryView from './entry-view';
 
 class Entry extends Component {
   static propTypes = {
     dirty: PropTypes.bool,
+    entries: PropTypes.array,
     mode: PropTypes.string,
     entry: PropTypes.object,
     onEditEntry: PropTypes.func,
@@ -130,8 +131,27 @@ class Entry extends Component {
     };
   }
 
+  renderFirstEntryMode() {
+    const { intl } = this.props;
+
+    return {
+      content: (
+        <EmptyView
+          caption={intl.formatMessage({
+            id: 'create-first-entry',
+            defaultMessage: 'Create your first entry'
+          })}
+          firstEntryView
+          className={styles.emptyView}
+          imageSrc={bench}
+        />
+      ),
+      footer: null
+    };
+  }
+
   render() {
-    const { entry, mode } = this.props;
+    const { entry, mode, entries } = this.props;
     let fn = null;
 
     if (entry && mode !== 'new') {
@@ -144,6 +164,9 @@ class Entry extends Component {
       fn = this.renderNewMode;
     } else {
       fn = this.renderIdleMode;
+      if (entries.length === 0) {
+        fn = this.renderFirstEntryMode;
+      }
     }
 
     const { content, footer } = fn.call(this);
