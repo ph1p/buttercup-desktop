@@ -12,7 +12,7 @@ const Node = styled.div`
 
 const EntryCount = styled.div`
   display: inline-block;
-  margin: 0 8px 0;
+  margin: 0 0 0 8px;
   color: var(--gray-dark);
   background-color: var(--sidebar-bg);
   border-radius: 10px;
@@ -65,6 +65,9 @@ class TreeLabel extends Component {
             <FormattedMessage id="untitled" defaultMessage="Untitled" />
           </i>
         )}
+        {/* <If condition={node.groups.length}>
+          <EntryCount>{node.groups.length}</EntryCount>
+        </If> */}
         <EntryCount>{entries.length}</EntryCount>
       </Node>
     );

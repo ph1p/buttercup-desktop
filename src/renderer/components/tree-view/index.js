@@ -13,7 +13,6 @@ import {
   createMenuFromGroups,
   createSortMenu
 } from '../../system/menu';
-import { isOSX } from '../../../shared/utils/platform';
 import '../../styles/tree-view.global';
 import BaseColumn from '../column';
 import TreeLabel from './tree-label';
@@ -27,7 +26,8 @@ const Column = styled(BaseColumn)`
 const SearchWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-right: calc(-1 * var(--spacing-half));
+  margin: -10px 0 0 0;
+  //margin-right: calc(-1 * var(--spacing-half));
 
   button {
     color: #fff;
@@ -37,9 +37,11 @@ const SearchWrapper = styled.div`
 class TreeView extends Component {
   static propTypes = {
     expandedKeys: PropTypes.array,
+    filter: PropTypes.string,
     selectedKeys: PropTypes.array,
     groups: PropTypes.array,
     sortMode: PropTypes.string,
+    entriesSortMode: PropTypes.string,
     onRemoveClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onCreateNew: PropTypes.func,
@@ -52,7 +54,10 @@ class TreeView extends Component {
     onSortModeChange: PropTypes.func,
     getEntries: PropTypes.func,
     onExpand: PropTypes.func,
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    onFilterChange: PropTypes.func,
+    onEntriesSortModeChange: PropTypes.func,
+    filteredEntries: PropTypes.array
   };
 
   handleColumnRightClick() {
@@ -207,10 +212,18 @@ class TreeView extends Component {
     }
   };
 
-  handleFilterChange = value => {};
+  handleFilterChange = value => {
+    this.props.onFilterChange(value);
+
+    console.log(this.props.filteredEntries);
+  };
+
+  handleSortModeChange = newMode => {
+    this.props.onEntriesSortModeChange(newMode);
+  };
 
   render() {
-    const { groups, getEntries } = this.props;
+    const { groups, getEntries, filter, filteredEntries } = this.props;
 
     const loop = children => {
       if (!children) {
@@ -250,7 +263,11 @@ class TreeView extends Component {
 
     const filterNode = (
       <SearchWrapper>
-        <SearchField onChange={this.handleFilterChange} />
+        <SearchField
+          onChange={this.handleFilterChange}
+          filter={filter}
+          entries={filteredEntries}
+        />
       </SearchWrapper>
     );
 

@@ -105,5 +105,6 @@
   "yes": "Ja",
   "no": "Nein",
   "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben.",
-  "create-first-entry": "Erstelle deinen ersten Eintrag"
+  "create-first-entry": "Erstelle deinen ersten Eintrag",
+  "nothing-found": "Leider nichts gefunden"
 }

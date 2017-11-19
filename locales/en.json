@@ -105,5 +105,6 @@
   "yes": "Yes",
   "no": "No",
   "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
-  "create-first-entry": "Create your first entry"
+  "create-first-entry": "Create your first entry",
+  "nothing-found": "Nothing found"
 }

@@ -9,6 +9,7 @@
     padding: $spacing-half $spacing-one;
     cursor: pointer !important;
     transition: background-color ease .2s;
+    position: relative;
 
     &.active {
       background-color: $brand-primary !important;
@@ -16,6 +17,21 @@
 
     &:hover {
       background-color: $black-20;
+      .trash {
+        opacity: 1;
+        transition: all .3s;
+        transform: translate(0, -50%);
+      }
+    }
+
+    .trash {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      opacity: 0;
+      transform: translate(15px, -50%);
+      cursor: pointer;
+      z-index: 2;
     }
 
     strong, small {

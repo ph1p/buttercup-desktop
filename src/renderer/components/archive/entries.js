@@ -4,7 +4,6 @@ import PlusIcon from 'react-icons/lib/md/add';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
-import { isOSX } from '../../../shared/utils/platform';
 import {
   showContextMenu,
   createMenuFromGroups,
@@ -12,8 +11,6 @@ import {
 } from '../../system/menu';
 import BaseColumn from '../column';
 import List from './entries-list';
-import SearchField from './search-field';
-import SortButton from './sort-button';
 
 const Column = styled(BaseColumn)`
   background-color: ${'var(--entries-bg)'};
@@ -32,27 +29,15 @@ const SearchWrapper = styled.div`
 
 class Entries extends Component {
   static propTypes = {
-    filter: PropTypes.string,
-    sortMode: PropTypes.string,
     entries: PropTypes.array,
     groups: PropTypes.array,
     currentEntry: PropTypes.object,
     currentGroup: PropTypes.object,
     onSelectEntry: PropTypes.func,
-    onFilterChange: PropTypes.func,
-    onSortModeChange: PropTypes.func,
     onEntryMove: PropTypes.func,
     onDelete: PropTypes.func,
     handleAddEntry: PropTypes.func,
     intl: intlShape.isRequired
-  };
-
-  handleFilterChange = value => {
-    this.props.onFilterChange(value);
-  };
-
-  handleSortModeChange = newMode => {
-    this.props.onSortModeChange(newMode);
   };
 
   onRightClick(entry) {
@@ -94,7 +79,7 @@ class Entries extends Component {
   }
 
   render() {
-    const { currentGroup, handleAddEntry, sortMode, filter } = this.props;
+    const { currentGroup, handleAddEntry, onDelete } = this.props;
     const addButton = (
       <Button
         onClick={handleAddEntry}
@@ -106,16 +91,11 @@ class Entries extends Component {
         <FormattedMessage id="add-entry" defaultMessage="Add Entry" />
       </Button>
     );
-    const filterNode = (
-      <SearchWrapper>
-        <SearchField onChange={this.handleFilterChange} filter={filter} />
-        <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
-      </SearchWrapper>
-    );
 
     return (
       <Column footer={addButton}>
         <List
+          onDelete={onDelete}
           entries={this.props.entries}
           currentEntry={this.props.currentEntry}
           onSelectEntry={this.props.onSelectEntry}

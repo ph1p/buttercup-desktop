@@ -55,12 +55,19 @@ export const getEntries = createSelector(
   getVisibleEntries,
   state => state.entries.filter,
   state => state.entries.sortMode,
+  (entries, filter, sortMode) => sortByKey(entries, sortMode)
+);
+
+export const getFilteredEntries = createSelector(
+  getAllEntries,
+  state => state.entries.filter,
+  state => state.entries.sortMode,
   (entries, filter, sortMode) => {
     if (filter && filter.length > 0) {
-      return filterByText(entries, filter);
+      return filterByText(Object.keys(entries).map(id => entries[id]), filter);
     }
 
-    return sortByKey(entries, sortMode);
+    return [];
   }
 );
 

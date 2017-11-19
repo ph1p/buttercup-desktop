@@ -1,51 +1,99 @@
 @import './variables';
-
 .wrapper {
-  position: relative;
-  flex: 1;
+    position: relative;
+    flex: 1;
 }
 
 .icon {
-  position: absolute;
-  top: 2px;
-  left: 3px;
-  color: rgba(255,255,255,.5);
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    color: rgba(255, 255, 255, .5);
 }
 
 .field {
-  width: 100%;
-  color: #fff;
-  background-color: $black-25;
-  border: 0;
-  border-radius: 5px;
-  outline: none;
-  padding: $spacing-half $spacing-two;
-  font-size: .8em;
-  display: block;
-  cursor: text !important;
-
-  &:focus {
-    background-color: $black-35;
-  }
+    width: 100%;
+    color: #fff;
+    background-color: $black-25;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+    padding: $spacing-half $spacing-two;
+    font-size: .8em;
+    display: block;
+    cursor: text !important;
+    &:focus {
+        background-color: $black-35;
+    }
 }
 
 .clear {
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  position: absolute;
-  top: 9px;
-  right: 7px;
-  border-radius: 50%;
-  opacity: .5;
-  font-size: 13px;
-  text-align: center;
-  line-height: 1;
-  cursor: pointer;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    border-radius: 50%;
+    opacity: .5;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    &:before {
+        content: "×";
+        color: #000;
+        opacity: .7;
+    }
+}
 
-  &:before {
-    content: "×";
-    color: #000;
-    opacity: .7;
-  }
+.results {
+    background-color: #fff;
+    position: fixed;
+    top: 48px;
+    margin-left: -18px;
+    z-index: 8;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 50px #000;
+    &:after {
+        bottom: 100%;
+        left: 28px;
+        border: solid transparent;
+        content: ' ';
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #ffffff;
+        border-width: 8px;
+        margin-left: -8px;
+    }
+    ul {
+        overflow-y: auto;
+        overflow-x: hidden;
+        list-style: none;
+        max-height: 400px;
+        margin: 0;
+        padding: 0;
+        li {
+            margin: 0;
+            padding: 12px;
+            color: $dark-primary;
+            border-bottom: 1px solid $gray;
+            &.nothingFound {
+                font-size: 14px;
+                text-align: center;
+            }
+            &:last-child {
+                border: 0;
+            }
+            p {
+                font-size: 12px;
+                margin: 0;
+                color: $black-25;
+            }
+        }
+    }
 }
