@@ -21,10 +21,10 @@ export function setupWindows(store) {
       minHeight: 500,
       title: app.getName(),
       // Temporary fix for High Sierra. See #339
-      titleBarStyle: isHighSierra() ? null : 'hiddenInset',
+      titleBarStyle: 'hiddenInset',
       show: process.env.NODE_ENV === 'development',
-      darkTheme: true,
-      vibrancy: 'ultra-dark'
+      darkTheme: true
+      //vibrancy: 'ultra-dark'
     });
 
     // Set initial menu bar visibility

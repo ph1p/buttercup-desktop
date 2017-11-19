@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import Archive from '../components/archive';
+import Archive from '../containers/archive';
 import Sidebar from '../containers/sidebar';
 import '../styles/workspace.global.scss';
 import UpdateNotice from './update-notice';

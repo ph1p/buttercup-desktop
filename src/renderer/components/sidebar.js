@@ -7,24 +7,18 @@ import EmptyView from './empty-view';
 import BaseColumn from './column';
 import SidebarItem from './sidebar-item';
 
-// Temporary fix for High Sierra. See #339
-const usesBigPadding = isOSX() && !isHighSierra();
-
 const Column = styled(BaseColumn)`
   width: ${props =>
     props.condenced
       ? 'var(--sidebar-width-condenced)'
       : 'var(--sidebar-width)'};
   height: 100%;
-  background-color: ${isOSX() ? 'transparent' : 'var(--sidebar-bg)'};
+  background-color: ${'var(--sidebar-bg)'};
   display: flex;
 `;
 
 const ArchiveList = styled.ul`
-  margin: ${usesBigPadding
-      ? 'calc(var(--spacing-one) * 3)'
-      : 'var(--spacing-one)'}
-    0 0 0;
+  margin: ${'calc(var(--spacing-one) * 3)'} 0 0 0;
   padding: 0;
 `;
 

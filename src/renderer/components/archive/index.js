@@ -7,37 +7,44 @@ import Entries from '../../containers/archive/entries';
 import Entry from '../../containers/archive/entry';
 import '../../styles/split-pane.global';
 
-const Archive = ({ onColumnSizeChange, columnSizes }) => (
-  <SplitPane
-    split="vertical"
-    minSize={150}
-    maxSize={500}
-    defaultSize={columnSizes ? columnSizes.tree : 230}
-    onChange={throttle(
-      size => onColumnSizeChange({ name: 'tree', size }),
-      1000
-    )}
-  >
-    <TreeView />
+const Archive = ({ onColumnSizeChange, columnSizes, entries }) => {
+  return (
     <SplitPane
       split="vertical"
       minSize={150}
       maxSize={500}
-      defaultSize={columnSizes ? columnSizes.entries : 230}
+      defaultSize={columnSizes ? columnSizes.tree : 230}
       onChange={throttle(
-        size => onColumnSizeChange({ name: 'entries', size }),
+        size => onColumnSizeChange({ name: 'tree', size }),
         1000
       )}
     >
-      <Entries />
-      <Entry />
+      <TreeView />
+      {entries.length !== 0 ? (
+        <SplitPane
+          split="vertical"
+          minSize={150}
+          maxSize={500}
+          defaultSize={columnSizes ? columnSizes.entries : 230}
+          onChange={throttle(
+            size => onColumnSizeChange({ name: 'entries', size }),
+            1000
+          )}
+        >
+          <Entries />
+          <Entry />
+        </SplitPane>
+      ) : (
+        <Entry />
+      )}
     </SplitPane>
-  </SplitPane>
-);
+  );
+};
 
 Archive.propTypes = {
   columnSizes: PropTypes.object,
-  onColumnSizeChange: PropTypes.func
+  onColumnSizeChange: PropTypes.func,
+  entries: PropTypes.array
 };
 
 export default Archive;

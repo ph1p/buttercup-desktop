@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import TreeView from '../components/tree-view';
 import * as groupTools from '../../shared/actions/groups';
+import * as entryTools from '../../shared/buttercup/entries';
 import {
   getGroups,
   getCurrentGroupId,
@@ -11,6 +12,8 @@ import { setExpandedKeys } from '../../shared/actions/ui';
 export default connect(
   state => ({
     groups: getGroups(state),
+    getEntries: groupId =>
+      entryTools.loadEntries(state.currentArchive, groupId) || 0,
     sortMode: state.groups.sortMode,
     expandedKeys: getExpandedKeys(state),
     selectedKeys: [getCurrentGroupId(state)]

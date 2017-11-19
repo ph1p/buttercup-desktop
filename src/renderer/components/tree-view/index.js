@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from '@buttercup/ui';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import SearchField from '../../components/archive/search-field';
 import {
   showContextMenu,
   createMenuFromGroups,
@@ -18,9 +19,19 @@ import BaseColumn from '../column';
 import TreeLabel from './tree-label';
 
 const Column = styled(BaseColumn)`
-  background-color: ${isOSX() ? 'var(--groups-bg-mac)' : 'var(--groups-bg)'};
+  background-color: var(--groups-bg);
   color: #fff;
   padding-top: var(--spacing-one);
+`;
+
+const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-right: calc(-1 * var(--spacing-half));
+
+  button {
+    color: #fff;
+  }
 `;
 
 class TreeView extends Component {
@@ -39,6 +50,7 @@ class TreeView extends Component {
     onEmptyTrash: PropTypes.func,
     onMoveGroup: PropTypes.func,
     onSortModeChange: PropTypes.func,
+    getEntries: PropTypes.func,
     onExpand: PropTypes.func,
     intl: intlShape.isRequired
   };
@@ -195,8 +207,10 @@ class TreeView extends Component {
     }
   };
 
+  handleFilterChange = value => {};
+
   render() {
-    const { groups } = this.props;
+    const { groups, getEntries } = this.props;
 
     const loop = children => {
       if (!children) {
@@ -217,6 +231,7 @@ class TreeView extends Component {
             })}
             title={
               <TreeLabel
+                entries={getEntries(node.id)}
                 node={node}
                 onRightClick={e => this.handleRightClick(node, groups, e)}
                 onAddClick={this.handleAddClick}
@@ -233,8 +248,15 @@ class TreeView extends Component {
       });
     };
 
+    const filterNode = (
+      <SearchWrapper>
+        <SearchField onChange={this.handleFilterChange} />
+      </SearchWrapper>
+    );
+
     return (
       <Column
+        header={filterNode}
         footer={
           <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
             <FormattedMessage id="new-group" defaultMessage="New Group" />

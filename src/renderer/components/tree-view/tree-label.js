@@ -10,6 +10,16 @@ const Node = styled.div`
   overflow: hidden;
 `;
 
+const EntryCount = styled.div`
+  display: inline-block;
+  margin: 0 8px 0;
+  color: var(--gray-dark);
+  background-color: var(--sidebar-bg);
+  border-radius: 10px;
+  padding: 0 6px;
+  font-size: 11px;
+`;
+
 class TreeLabel extends Component {
   static propTypes = {
     node: PropTypes.object.isRequired,
@@ -33,7 +43,7 @@ class TreeLabel extends Component {
   };
 
   render() {
-    const { node, onRightClick } = this.props;
+    const { node, onRightClick, entries } = this.props;
     const { title, isNew, isRenaming } = node;
 
     if (isNew || isRenaming) {
@@ -55,6 +65,7 @@ class TreeLabel extends Component {
             <FormattedMessage id="untitled" defaultMessage="Untitled" />
           </i>
         )}
+        <EntryCount>{entries.length}</EntryCount>
       </Node>
     );
   }

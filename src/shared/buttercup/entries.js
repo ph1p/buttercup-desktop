@@ -76,12 +76,13 @@ export function loadEntries(archiveId, groupId) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'group-not-found-error',
-        defaultMessage: 'Group has not been found'
-      })
-    );
+    // throw new Error(
+    //   i18n.formatMessage({
+    //     id: 'group-not-found-error',
+    //     defaultMessage: 'Group has not been found'
+    //   })
+    // );
+    return [];
   }
 
   return group.getEntries().map(entry => entryToObj(entry));
