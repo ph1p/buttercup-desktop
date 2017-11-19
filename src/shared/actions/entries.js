@@ -29,16 +29,18 @@ export const loadEntries = (archiveId, groupId) => ({
   payload: entryTools.loadEntries(archiveId, groupId)
 });
 
+const updateEntries = (newValues = []) => ({
+  type: ENTRIES_UPDATE,
+  payload: newValues
+});
+
 export const updateEntry = newValues => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
 
   entryTools
     .updateEntry(archiveId, newValues)
     .then(() => {
-      dispatch({
-        type: ENTRIES_UPDATE,
-        payload: newValues
-      });
+      dispatch(updateEntries(newValues));
 
       dispatch(changeMode('view')());
     })
@@ -64,6 +66,7 @@ export const newEntry = newValues => (dispatch, getState) => {
         payload: entryObj
       });
       dispatch(selectEntry(entryObj.id));
+      dispatch(updateEntries());
     })
     .catch(err => {
       showDialog(err);
@@ -80,6 +83,7 @@ export const moveEntry = (entryId, groupId) => (dispatch, getState) => {
     }
   });
   entryTools.moveEntry(archiveId, entryId, groupId);
+  dispatch(updateEntries());
 };
 
 export const deleteEntry = entryId => (dispatch, getState) => {
@@ -96,6 +100,11 @@ export const deleteEntry = entryId => (dispatch, getState) => {
           payload: entryId
         });
         entryTools.deleteEntry(archiveId, entryId);
+
+        dispatch({
+          type: ENTRIES_UPDATE,
+          payload: []
+        });
       }
     }
   );
