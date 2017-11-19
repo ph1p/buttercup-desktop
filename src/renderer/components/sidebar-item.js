@@ -17,7 +17,7 @@ const Wrapper = styled.li`
   color: #fff;
   background-color: ${props =>
     props.active ? 'rgba(255, 255, 255, .1)' : 'transparent'};
-  padding: var(--spacing-half) var(--spacing-one);
+  padding: var(--spacing-half) 0;
   cursor: ${props => (props.locked ? 'pointer' : 'default')} !important;
 
   .status {
@@ -63,6 +63,7 @@ const Avatar = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  margin: 0 auto;
 
   &:hover {
     .cog {
