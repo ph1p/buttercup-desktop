@@ -23,7 +23,8 @@ const EmptyView = ({
   imageSrc,
   className,
   handleAddEntry,
-  firstEntryView
+  firstEntryView,
+  t
 }) => {
   return (
     <Flex align="center" justify="center" flexAuto className={className}>
@@ -33,7 +34,7 @@ const EmptyView = ({
         <If condition={firstEntryView}>
           <br />
           <Button onClick={handleAddEntry} full light icon={<PlusIcon />}>
-            <FormattedMessage id="add-entry" defaultMessage="Add Entry" />
+            {t('add-entry')}
           </Button>
         </If>
       </Figure>
@@ -49,7 +50,7 @@ EmptyView.propTypes = {
   firstEntryView: PropTypes.bool
 };
 
-export default EmptyView;
+export default translate()(EmptyView);
 
 const ColoredFlex = styled(Flex)`
   background-color: #181b1f;

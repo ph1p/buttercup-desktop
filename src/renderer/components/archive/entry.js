@@ -129,15 +129,12 @@ class Entry extends Component {
   }
 
   renderFirstEntryMode() {
-    const { intl } = this.props;
+    const { t } = this.props;
 
     return {
       content: (
         <EmptyView
-          caption={intl.formatMessage({
-            id: 'create-first-entry',
-            defaultMessage: 'Create your first entry'
-          })}
+          caption={t('create-first-entry')}
           firstEntryView
           className={styles.emptyView}
           imageSrc={bench}

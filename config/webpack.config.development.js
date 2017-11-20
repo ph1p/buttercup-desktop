@@ -2,9 +2,10 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(baseConfig, {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval',
 
   entry: {
     main: [
@@ -45,6 +46,7 @@ module.exports = merge(baseConfig, {
   },
 
   plugins: [
+    new FriendlyErrorsWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({

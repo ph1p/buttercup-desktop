@@ -125,5 +125,7 @@
   "zoom": "Zoom",
   "front": "Bring all to front",
   "stopspeaking": "Stop speaking",
-  "startspeaking": "Start speaking"
+  "startspeaking": "Start speaking",
+  "create-first-entry": "Create your first entry",
+  "nothing-found": "Nothing found"
 }
