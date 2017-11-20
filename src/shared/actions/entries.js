@@ -29,18 +29,16 @@ export const loadEntries = (archiveId, groupId) => ({
   payload: entryTools.loadEntries(archiveId, groupId)
 });
 
-const updateEntries = (newValues = []) => ({
-  type: ENTRIES_UPDATE,
-  payload: newValues
-});
-
 export const updateEntry = newValues => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
 
   entryTools
     .updateEntry(archiveId, newValues)
     .then(() => {
-      dispatch(updateEntries(newValues));
+      dispatch({
+        type: ENTRIES_UPDATE,
+        payload: newValues
+      });
 
       dispatch(changeMode('view')());
     })
@@ -66,7 +64,6 @@ export const newEntry = newValues => (dispatch, getState) => {
         payload: entryObj
       });
       dispatch(selectEntry(entryObj.id));
-      dispatch(updateEntries());
     })
     .catch(err => {
       showDialog(err);
@@ -83,29 +80,17 @@ export const moveEntry = (entryId, groupId) => (dispatch, getState) => {
     }
   });
   entryTools.moveEntry(archiveId, entryId, groupId);
-  dispatch(updateEntries());
 };
 
 export const deleteEntry = entryId => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
-  showConfirmDialog(
-    i18n.formatMessage({
-      id: 'are-you-sure-question',
-      defaultMessage: 'Are you sure?'
-    }),
-    resp => {
-      if (resp === 0) {
-        dispatch({
-          type: ENTRIES_DELETE,
-          payload: entryId
-        });
-        entryTools.deleteEntry(archiveId, entryId);
-
-        dispatch({
-          type: ENTRIES_UPDATE,
-          payload: []
-        });
-      }
+  showConfirmDialog(i18n.t('are-you-sure-question'), resp => {
+    if (resp === 0) {
+      dispatch({
+        type: ENTRIES_DELETE,
+        payload: entryId
+      });
+      entryTools.deleteEntry(archiveId, entryId);
     }
-  );
+  });
 };

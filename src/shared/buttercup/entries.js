@@ -36,33 +36,17 @@ export function validateEntry(entry) {
   // filter empty values
 
   if (!entry.properties) {
-    errorMessages.push(
-      i18n.formatMessage({
-        id: 'entry-inputs-empty-info',
-        defaultMessage: 'Please enter at least a title.'
-      })
-    );
+    errorMessages.push(i18n.t('entry-inputs-empty-info'));
   } else {
     if (!entry.properties.title) {
-      errorMessages.push(
-        i18n.formatMessage({
-          id: 'entry-title-empty-info',
-          defaultMessage: 'Please enter a title.'
-        })
-      );
+      errorMessages.push(i18n.t('entry-title-empty-info'));
     }
 
     if (
       (entry.meta || []).filter(metaEntry => !metaEntry.key && metaEntry.value)
         .length > 0
     ) {
-      errorMessages.push(
-        i18n.formatMessage({
-          id: 'custom-fields-label-empty-info',
-          defaultMessage:
-            "You've forgotten to set a title for one or more custom fields."
-        })
-      );
+      errorMessages.push(i18n.t('custom-fields-label-empty-info'));
     }
   }
 
@@ -72,24 +56,14 @@ export function validateEntry(entry) {
 }
 
 export function loadEntries(archiveId, groupId) {
-  try {
-    const arch = getArchive(archiveId);
-    const group = arch.findGroupByID(groupId);
+  const arch = getArchive(archiveId);
+  const group = arch.findGroupByID(groupId);
 
-    if (!group || !arch) {
-      // throw new Error(
-      //   i18n.formatMessage({
-      //     id: 'group-not-found-error',
-      //     defaultMessage: 'Group has not been found'
-      //   })
-      // );
-      return [];
-    }
-
-    return group.getEntries().map(entry => entryToObj(entry));
-  } catch (err) {
-    return [];
+  if (!group) {
+    throw new Error(i18n.t('group-not-found-error'));
   }
+
+  return group.getEntries().map(entry => entryToObj(entry));
 }
 
 export function updateEntry(archiveId, entryObj) {
@@ -97,12 +71,7 @@ export function updateEntry(archiveId, entryObj) {
   const entry = arch.getEntryByID(entryObj.id);
 
   if (!entry) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'entry-not-found-error',
-        defaultMessage: 'Entry has not been found'
-      })
-    );
+    throw new Error(i18n.t('entry-not-found-error'));
   }
 
   return new Promise((resolve, reject) => {
@@ -159,12 +128,7 @@ export function createEntry(archiveId, groupId, newValues) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'group-not-found-error',
-        defaultMessage: 'Group has not been found'
-      })
-    );
+    throw new Error(i18n.t('group-not-found-error'));
   }
 
   return new Promise((resolve, reject) => {
@@ -196,12 +160,7 @@ export function deleteEntry(archiveId, entryId) {
   const entry = arch.getEntryByID(entryId);
 
   if (!entry) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'entry-not-found-error',
-        defaultMessage: 'Entry has not been found'
-      })
-    );
+    throw new Error(i18n.t('entry-not-found-error'));
   }
 
   entry.delete();
@@ -214,12 +173,7 @@ export function moveEntry(archiveId, entryId, groupId) {
   const group = arch.findGroupByID(groupId);
 
   if (!entry || !group) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'entry-not-found-error',
-        defaultMessage: 'Entry has not been found'
-      })
-    );
+    throw new Error(i18n.t('entry-not-found-error'));
   }
 
   entry.moveToGroup(group);

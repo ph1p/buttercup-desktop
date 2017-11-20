@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import { Button } from '@buttercup/ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
@@ -23,7 +23,7 @@ class Entry extends Component {
     handleEditMode: PropTypes.func,
     handleViewMode: PropTypes.func,
     initializeForm: PropTypes.func,
-    intl: intlShape.isRequired
+    t: PropTypes.func
   };
 
   componentWillReceiveProps(nextProps) {
@@ -36,6 +36,7 @@ class Entry extends Component {
   }
 
   renderEditMode() {
+    const { t } = this.props;
     let ref;
     return {
       content: (
@@ -54,11 +55,9 @@ class Entry extends Component {
               disabled={!this.props.dirty}
               primary
             >
-              <FormattedMessage id="save" defaultMessage="Save" />
+              {t('save')}
             </Button>{' '}
-            <Button onClick={this.props.handleViewMode}>
-              <FormattedMessage id="cancel" defaultMessage="Cancel" />
-            </Button>
+            <Button onClick={this.props.handleViewMode}>{t('cancel')}</Button>
           </div>
           <div>
             <Button
@@ -66,7 +65,7 @@ class Entry extends Component {
               icon={<TrashIcon />}
               danger
             >
-              <FormattedMessage id="delete" defaultMessage="Delete" />
+              {t('delete')}
             </Button>
           </div>
         </div>
@@ -75,6 +74,7 @@ class Entry extends Component {
   }
 
   renderNewMode() {
+    const { t } = this.props;
     let ref;
     return {
       content: (
@@ -92,37 +92,34 @@ class Entry extends Component {
             disabled={!this.props.dirty}
             primary
           >
-            <FormattedMessage id="save" defaultMessage="Save" />
+            {t('save')}
           </Button>{' '}
-          <Button onClick={this.props.handleViewMode}>
-            <FormattedMessage id="cancel" defaultMessage="Cancel" />
-          </Button>
+          <Button onClick={this.props.handleViewMode}>{t('cancel')}</Button>
         </div>
       )
     };
   }
 
   renderViewMode() {
+    const { t } = this.props;
+
     return {
       content: <EntryView entry={this.props.entry} />,
       footer: (
         <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>
-          <FormattedMessage id="edit" defaultMessage="Edit" />
+          {t('edit')}
         </Button>
       )
     };
   }
 
   renderIdleMode() {
-    const { intl } = this.props;
+    const { t } = this.props;
 
     return {
       content: (
         <EmptyView
-          caption={intl.formatMessage({
-            id: 'select-or-create-an-entry',
-            defaultMessage: 'Select or Create an Entry'
-          })}
+          caption={t('select-or-create-an-entry')}
           className={styles.emptyView}
           imageSrc={bench}
         />
@@ -184,4 +181,4 @@ class Entry extends Component {
   }
 }
 
-export default injectIntl(Entry);
+export default translate()(Entry);
