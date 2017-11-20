@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -26,7 +26,8 @@ class TreeLabel extends Component {
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onCreateNew: PropTypes.func,
-    onRightClick: PropTypes.func
+    onRightClick: PropTypes.func,
+    t: PropTypes.func
   };
 
   handleSave = title => {
@@ -43,7 +44,7 @@ class TreeLabel extends Component {
   };
 
   render() {
-    const { node, onRightClick, entries } = this.props;
+    const { node, onRightClick, entries, t } = this.props;
     const { title, isNew, isRenaming } = node;
 
     if (isNew || isRenaming) {
@@ -60,11 +61,7 @@ class TreeLabel extends Component {
 
     return (
       <Node onContextMenu={onRightClick}>
-        {title.trim() || (
-          <i>
-            <FormattedMessage id="untitled" defaultMessage="Untitled" />
-          </i>
-        )}
+        {title.trim() || <i>{t('untitled')}</i>}
         {/* <If condition={node.groups.length}>
           <EntryCount>{node.groups.length}</EntryCount>
         </If> */}
@@ -74,4 +71,4 @@ class TreeLabel extends Component {
   }
 }
 
-export default TreeLabel;
+export default translate()(TreeLabel);
