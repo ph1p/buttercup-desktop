@@ -2,7 +2,8 @@
   "welcome-back-title": "Bon retour dans Buttercup.",
   "unlock-archive": "Déverrouillez une archive pour commencer ({{os}}).",
   "welcome-title": "Bienvenue dans Buttercup.",
-  "welcome-caption": "Vous n’avez pas encore ajouté d’archive. Pourquoi ne pas en ajouter une ?",
+  "welcome-caption":
+    "Vous n’avez pas encore ajouté d’archive. Pourquoi ne pas en ajouter une ?",
   "open-archive-file": "Ouvrir un fichier archive",
   "new-archive-file": "Créer un fichier archive",
   "connect-cloud-sources": "Connecter des sources sur le Cloud",
@@ -47,7 +48,8 @@
   "save": "Enregistrer",
   "empty-trash": "Vider la corbeille",
   "empty-trash-question": "Êtes-vous sûr de vouloir vider la corbeille ?",
-  "no-custom-fields-info-text": "Aucun champ personnalisé. Voulez-vous en ajouter un ?",
+  "no-custom-fields-info-text":
+    "Aucun champ personnalisé. Voulez-vous en ajouter un ?",
   "custom-fields": "Champs personnalisés",
   "title": "Titre",
   "username": "Identifiant",
@@ -59,8 +61,10 @@
   "reveal": "Afficher",
   "reveal-password": "Afficher le mot de passe",
   "installing": "En cours d’installation",
-  "update-available-message": "Buttercup {{version}} est disponible. Cliquez pour l’installer maintenant.",
-  "archive-saved-loading-info": "Votre archive est en cours de sauvegarde.<br>Fermeture automatique",
+  "update-available-message":
+    "Buttercup {{version}} est disponible. Cliquez pour l’installer maintenant.",
+  "archive-saved-loading-info":
+    "Votre archive est en cours de sauvegarde.<br>Fermeture automatique",
   "unlock": "Déverrouiller",
   "open": "Ouvrir",
   "change-color": "Changer la couleur",
@@ -68,13 +72,17 @@
   "import-from-type": "Depuis l’archive {{name}} (.{{extension}})",
   "import-to-type": "Vers {{name}}",
   "archive-remove-with-name": "Retirer {{name}}",
-  "dropbox-connection-failed-info": "Échec de la connexion au serveur Dropbox. Veuillez réessayer ultérieurement",
+  "dropbox-connection-failed-info":
+    "Échec de la connexion au serveur Dropbox. Veuillez réessayer ultérieurement",
   "connect-to-dropbox": "Connexion à Dropbox",
   "authenticate-with-dropbox": "Authentification avec Dropbox",
-  "dropbox-description-text": "Connectez Buttercup à votre compte Dropbox pour lire et enregistrer vos archives.<br />Nous n’enregistrons pas vos identifiants Dropbox.",
-  "webdav-connection-failed-info": "La connexion à {{endpoint}} a échoué. Veuillez vérifier vos identifiants et essayer à nouveau.",
+  "dropbox-description-text":
+    "Connectez Buttercup à votre compte Dropbox pour lire et enregistrer vos archives.<br />Nous n’enregistrons pas vos identifiants Dropbox.",
+  "webdav-connection-failed-info":
+    "La connexion à {{endpoint}} a échoué. Veuillez vérifier vos identifiants et essayer à nouveau.",
   "connect-to-wedav": "Connexion au serveur {{title}}",
-  "webdav-description-text": "Entrez l’adresse de connexion à {{title}} ainsi que votre identifiant et votre mot de passe puis choisissez une archive Buttercup. Nous <strong>enregistrons</strong> et <strong>encryptons</strong> vos identifiants.",
+  "webdav-description-text":
+    "Entrez l’adresse de connexion à {{title}} ainsi que votre identifiant et votre mot de passe puis choisissez une archive Buttercup. Nous <strong>enregistrons</strong> et <strong>encryptons</strong> vos identifiants.",
   "name": "Nom",
   "size": "Taille",
   "date": "Date",
@@ -90,6 +98,7 @@
   "confirm-password": "Confirmation du mot de passe",
   "group-not-found-error": "Le groupe n’existe pas.",
   "sort-definition-not-found-error": "Le critère de tri n'existe pas",
-  "insufficient-data-provided-error": "Pas assez d’informations pour lancer le tri",
+  "insufficient-data-provided-error":
+    "Pas assez d’informations pour lancer le tri",
   "check-for-update-error": "Vérification de la mise à jour"
 }

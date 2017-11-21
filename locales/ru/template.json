@@ -2,7 +2,8 @@
   "welcome-back-title": "С возвращением в Buttercup.",
   "unlock-archive": "Разблокируйте архив, чтобы начать ({{os}}).",
   "welcome-title": "Добро пожаловать в Buttercup.",
-  "welcome-caption": "Вы пока не добавили ни одного архива. Почему бы не добавить один прямо сейчас?",
+  "welcome-caption":
+    "Вы пока не добавили ни одного архива. Почему бы не добавить один прямо сейчас?",
   "open-archive-file": "Открыть файл архива",
   "new-archive-file": "Новый файл архива",
   "connect-cloud-sources": "Подключить облачное хранилище",
@@ -47,7 +48,8 @@
   "save": "Сохранить",
   "empty-trash": "Очистить корзину",
   "empty-trash-question": "Вы уверены, что хотите очистить корзину?",
-  "no-custom-fields-info-text": "Пока нет произвольных полей. Почему бы не добавить одно прямо сейчас?",
+  "no-custom-fields-info-text":
+    "Пока нет произвольных полей. Почему бы не добавить одно прямо сейчас?",
   "custom-fields": "Произвольные поля",
   "title": "Заголовок",
   "username": "Имя пользователя",
@@ -59,8 +61,10 @@
   "reveal": "Показать",
   "reveal-password": "Показать пароль",
   "installing": "Установка",
-  "update-available-message": "Доступен Buttercup версии {{version}}. Нажмите здесь, чтобы установить сейчас.",
-  "archive-saved-loading-info": "Ваш архив сохраняется.<br>Программа завершится автоматически.",
+  "update-available-message":
+    "Доступен Buttercup версии {{version}}. Нажмите здесь, чтобы установить сейчас.",
+  "archive-saved-loading-info":
+    "Ваш архив сохраняется.<br>Программа завершится автоматически.",
   "unlock": "Разблокировать",
   "open": "Открыть",
   "change-color": "Изменить цвет",
@@ -68,13 +72,17 @@
   "import-from-type": "Из {{name}} архива (.{{extension}})",
   "import-to-type": "В {{name}}",
   "archive-remove-with-name": "Изъять {{name}}",
-  "dropbox-connection-failed-info": "Подключение к серверу Dropbox не удалось. Попробуйте попозже ещё раз.",
+  "dropbox-connection-failed-info":
+    "Подключение к серверу Dropbox не удалось. Попробуйте попозже ещё раз.",
   "connect-to-dropbox": "Подключиться к Dropbox",
   "authenticate-with-dropbox": "Авторизоваться в Dropbox",
-  "dropbox-description-text": "Подключите Buttercup к Вашему аккаунту Dropbox, чтобы иметь возможность открывать и сохранять Ваши архивы.<br/>Мы не сохраняем Ваши имя пользователя и пароль от Dropbox.",
-  "webdav-connection-failed-info": "Подключение к {{endpoint}} не удалось. Пожалуйста, проверьте Ваши регистрационные данные и попробуйте ещё раз.",
+  "dropbox-description-text":
+    "Подключите Buttercup к Вашему аккаунту Dropbox, чтобы иметь возможность открывать и сохранять Ваши архивы.<br/>Мы не сохраняем Ваши имя пользователя и пароль от Dropbox.",
+  "webdav-connection-failed-info":
+    "Подключение к {{endpoint}} не удалось. Пожалуйста, проверьте Ваши регистрационные данные и попробуйте ещё раз.",
   "connect-to-wedav": "Подключиться к серверу {{title}}",
-  "webdav-description-text": "Введите Ваши адрес конечной точки, имя пользователя и пароль от {{title}} для подключения и выберите архив Buttercup. Мы <strong>сохраним</strong> Ваши регистрационные данные и зашифруем их.",
+  "webdav-description-text":
+    "Введите Ваши адрес конечной точки, имя пользователя и пароль от {{title}} для подключения и выберите архив Buttercup. Мы <strong>сохраним</strong> Ваши регистрационные данные и зашифруем их.",
   "name": "Имя",
   "size": "Размер",
   "date": "Дата",
