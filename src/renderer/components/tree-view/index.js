@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from '@buttercup/ui';
 import SearchField from '../../components/archive/search-field';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import {
   showContextMenu,
   createMenuFromGroups,
@@ -249,7 +249,9 @@ class TreeView extends Component {
         header={filterNode}
         footer={
           <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
-            {t('new-group')}
+            <Trans i18nKey="new-group" parent="span">
+              New Group
+            </Trans>
           </Button>
         }
         onContextMenu={() => this.handleColumnRightClick()}

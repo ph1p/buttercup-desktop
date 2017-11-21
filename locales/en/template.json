@@ -127,5 +127,6 @@
   "stopspeaking": "Stop speaking",
   "startspeaking": "Start speaking",
   "create-first-entry": "Create your first entry",
-  "nothing-found": "Nothing found"
+  "nothing-found": "Nothing found",
+  "close": "Close"
 }

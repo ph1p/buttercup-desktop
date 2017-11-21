@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
@@ -22,7 +22,6 @@ class Manager extends Component {
     containerHeight: PropTypes.number,
     onSelectFile: PropTypes.func,
     toggleCreateButton: PropTypes.func,
-    t: PropTypes.func,
     fs: PropTypes.object
   };
 
@@ -148,7 +147,7 @@ class Manager extends Component {
   }
 
   render() {
-    const { containerWidth, containerHeight, t } = this.props;
+    const { containerWidth, containerHeight } = this.props;
     const { contents, selectedIndex } = this.state;
     const scrollIndex = contents.findIndex(item => item.editing);
 
@@ -175,7 +174,14 @@ class Manager extends Component {
         />
         <Column
           columnKey="name"
-          header={<Cell>{t('name')}</Cell>}
+          header={
+            <Cell>
+              {' '}
+              <Trans i18nKey="name" parent="span">
+                Name
+              </Trans>
+            </Cell>
+          }
           cell={
             <TextCell
               data={contents}
@@ -190,14 +196,28 @@ class Manager extends Component {
         />
         <Column
           columnKey="size"
-          header={<Cell>{t('size')}</Cell>}
+          header={
+            <Cell>
+              {' '}
+              <Trans i18nKey="size" parent="span">
+                Size
+              </Trans>
+            </Cell>
+          }
           cell={<SizeCell data={contents} />}
           width={100}
           fixed
         />
         <Column
           columnKey="mtime"
-          header={<Cell>{t('date')}</Cell>}
+          header={
+            <Cell>
+              {' '}
+              <Trans i18nKey="date" parent="span">
+                Date
+              </Trans>
+            </Cell>
+          }
           cell={<DateCell data={contents} />}
           width={100}
           fixed

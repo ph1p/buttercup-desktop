@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import SearchIcon from 'react-icons/lib/md/search';
 import styles from '../../styles/search-field';
 // import SortButton from './sort-button';
@@ -65,10 +65,9 @@ class SearchField extends Component {
                 ))
               ) : (
                 <li className={styles.nothingFound}>
-                  <FormattedMessage
-                    id="nothing-found"
-                    defaultMessage="Nothing found"
-                  />
+                  <Trans i18nKey="nothing-found" parent="span">
+                    Nothing found
+                  </Trans>
                 </li>
               )}
             </ul>

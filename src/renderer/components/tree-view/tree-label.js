@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -26,8 +26,7 @@ class TreeLabel extends Component {
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onCreateNew: PropTypes.func,
-    onRightClick: PropTypes.func,
-    t: PropTypes.func
+    onRightClick: PropTypes.func
   };
 
   handleSave = title => {
@@ -61,10 +60,14 @@ class TreeLabel extends Component {
 
     return (
       <Node onContextMenu={onRightClick}>
-        {title.trim() || <i>{t('untitled')}</i>}
-        {/* <If condition={node.groups.length}>
-          <EntryCount>{node.groups.length}</EntryCount>
-        </If> */}
+        {title.trim() || (
+          <i>
+            {' '}
+            <Trans i18nKey="untitled" parent="span">
+              Untitled
+            </Trans>
+          </i>
+        )}
         <EntryCount>{entries.length}</EntryCount>
       </Node>
     );

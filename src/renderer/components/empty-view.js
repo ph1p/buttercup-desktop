@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import PlusIcon from 'react-icons/lib/md/add';
-import { translate } from 'react-i18next';
+import { translate, Trans, Interpolate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
 import { isOSX } from '../../shared/utils/platform';
@@ -23,8 +23,7 @@ const EmptyView = ({
   imageSrc,
   className,
   handleAddEntry,
-  firstEntryView,
-  t
+  firstEntryView
 }) => {
   return (
     <Flex align="center" justify="center" flexAuto className={className}>
@@ -34,7 +33,9 @@ const EmptyView = ({
         <If condition={firstEntryView}>
           <br />
           <Button onClick={handleAddEntry} full light icon={<PlusIcon />}>
-            {t('add-entry')}
+            <Trans i18nKey="add-entry" parent="span">
+              Add Entry
+            </Trans>
           </Button>
         </If>
       </Figure>
@@ -61,37 +62,46 @@ const Title = styled.h3`
   margin-bottom: var(--spacing-half);
 `;
 
-const NoArchiveSelectedView = ({ t }) => (
+const NoArchiveSelectedView = () => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>{t('welcome-back-title')}</Title>
+      <Title>
+        <Trans i18nKey="welcome-back-title" parent="span">
+          Welcome back to Buttercup.
+        </Trans>
+      </Title>
       <Caption>
-        {t('unlock-archive', { os: `${isOSX() ? '⌘' : 'Ctrl'}+1` })}
+        <Interpolate
+          i18nKey="unlock-archive"
+          os={`${isOSX() ? '⌘' : 'Ctrl'}+1`}
+        >
+          Unlock an archive to begin ({`${isOSX() ? '⌘' : 'Ctrl'}+1`}).
+        </Interpolate>
       </Caption>
     </Figure>
   </ColoredFlex>
 );
 
-NoArchiveSelectedView.propTypes = {
-  t: PropTypes.func
-};
-
 export const NoArchiveSelected = translate()(NoArchiveSelectedView);
 
-const WelcomeScreenView = ({ t }) => (
+const WelcomeScreenView = () => (
   <ColoredFlex align="center" justify="center" flexColumn flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>{t('welcome-title')}</Title>
-      <Caption>{t('welcome-caption')}</Caption>
+      <Title>
+        <Trans i18nKey="welcome-title" parent="span">
+          Welcome to Buttercup.
+        </Trans>
+      </Title>
+      <Caption>
+        <Trans i18nKey="welcome-caption" parent="span">
+          You haven't added any archives yet. Why not add one?
+        </Trans>
+      </Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>
 );
-
-WelcomeScreenView.propTypes = {
-  t: PropTypes.func
-};
 
 export const WelcomeScreen = translate()(WelcomeScreenView);
