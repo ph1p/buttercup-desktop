@@ -1,7 +1,8 @@
 import path from 'path';
 import {
   ArchiveManager,
-  createCredentials
+  createCredentials,
+  EntryFinder
 } from 'buttercup/dist/buttercup-web.min';
 import ElectronStorageInterface from './storage';
 import { enqueue } from '../../renderer/system/queue';
@@ -9,6 +10,7 @@ import './ipc-datasource';
 import i18n from '../i18n';
 
 let __sharedManager = null;
+let __sharedEntrySearch = null;
 
 export function addArchiveToArchiveManager(masterConfig, masterPassword) {
   const { credentials, datasource, type, path: filePath, isNew } = masterConfig;
@@ -83,6 +85,15 @@ export function getArchive(archiveId) {
   const sourceIndex = manager.indexOfSource(archiveId);
   const source = manager.sources[sourceIndex];
   return source.workspace.primary.archive;
+}
+
+export function getArchiveEntryFinder(archiveId, reload = false) {
+  const archive = getArchive(archiveId);
+
+  if (__sharedEntrySearch === null || reload) {
+    __sharedEntrySearch = new EntryFinder([archive]);
+  }
+  return __sharedEntrySearch;
 }
 
 export function saveWorkspace(archiveId) {

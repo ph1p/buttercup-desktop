@@ -20,7 +20,8 @@ import {
   addArchiveToArchiveManager,
   lockArchiveInArchiveManager,
   removeArchiveFromArchiveManager,
-  unlockArchiveInArchiveManager
+  unlockArchiveInArchiveManager,
+  getArchiveEntryFinder
 } from '../buttercup/archive';
 import i18n from '../i18n';
 
@@ -39,6 +40,7 @@ export const loadArchive = payload => (dispatch, getState) => {
   }
   dispatch(setCurrentArchive(payload));
   dispatch(reloadGroups());
+  dispatch(reloadArchiveEntrySearch());
 };
 
 export const removeArchive = payload => () => {
@@ -46,7 +48,6 @@ export const removeArchive = payload => () => {
 };
 
 export const lockArchive = payload => dispatch => {
-  console.log(payload);
   return lockArchiveInArchiveManager(payload).then(archiveId => {
     dispatch(lockArchiveInStore(archiveId));
     dispatch(setCurrentArchive(null));
@@ -71,6 +72,18 @@ export const loadOrUnlockArchive = payload => (dispatch, getState) => {
   } else {
     dispatch(loadArchive(payload));
   }
+};
+
+export const reloadArchiveEntrySearch = payload => (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+
+  getArchiveEntryFinder(archiveId, true);
+};
+
+export const searchInArchive = payload => (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+
+  return getArchiveEntryFinder(archiveId).search(payload);
 };
 
 export const addArchive = payload => async (dispatch, getState) => {

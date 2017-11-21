@@ -8,6 +8,7 @@ import styles from '../../styles/search-field';
 class SearchField extends Component {
   static propTypes = {
     onChange: PropTypes.func,
+    onSelectEntry: PropTypes.func,
     entries: PropTypes.array,
     filter: PropTypes.string,
     t: PropTypes.func
@@ -29,7 +30,7 @@ class SearchField extends Component {
 
   // <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
   render() {
-    const { filter, onChange, t, entries } = this.props;
+    const { filter, onChange, t, entries, onSelectEntry } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -58,9 +59,9 @@ class SearchField extends Component {
             <ul>
               {entries.length > 0 ? (
                 entries.map((entry, index) => (
-                  <li key={index}>
-                    {entry.properties.title}
-                    <p>{entry.properties.username}</p>
+                  <li key={index} onClick={() => onSelectEntry(entry.id)}>
+                    {entry.title}
+                    <p>{entry.username}</p>
                   </li>
                 ))
               ) : (

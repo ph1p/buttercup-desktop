@@ -14,7 +14,7 @@
 .field {
     width: 100%;
     color: #fff;
-    background-color: $black-25;
+    background-color: #1b1d21;
     border: 0;
     border-radius: 5px;
     outline: none;
@@ -48,28 +48,12 @@
 }
 
 .results {
-    background-color: #fff;
-    position: fixed;
-    top: 48px;
-    margin-left: -18px;
+    background-color: #1b1d21;
+    position: absolute;
+    top: 28px;
     z-index: 8;
-    width: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 50px #000;
-    &:after {
-        bottom: 100%;
-        left: 28px;
-        border: solid transparent;
-        content: ' ';
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border-color: rgba(255, 255, 255, 0);
-        border-bottom-color: #ffffff;
-        border-width: 8px;
-        margin-left: -8px;
-    }
+    width: 100%;
+    border-radius: 0 0 6px 6px;
     ul {
         overflow-y: auto;
         overflow-x: hidden;
@@ -80,8 +64,8 @@
         li {
             margin: 0;
             padding: 12px;
-            color: $dark-primary;
-            border-bottom: 1px solid $gray;
+            color: #fff;
+            border-bottom: 1px solid #24272c;
             &.nothingFound {
                 font-size: 14px;
                 text-align: center;
@@ -92,7 +76,7 @@
             p {
                 font-size: 12px;
                 margin: 0;
-                color: $black-25;
+                color: #4b515c;
             }
         }
     }

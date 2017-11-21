@@ -56,8 +56,13 @@ class TreeView extends Component {
     onExpand: PropTypes.func,
     onFilterChange: PropTypes.func,
     onEntriesSortModeChange: PropTypes.func,
-    filteredEntries: PropTypes.array,
+    searchInArchive: PropTypes.func,
+    onSelectEntry: PropTypes.func,
     t: PropTypes.func
+  };
+
+  state = {
+    filteredEntries: []
   };
 
   handleColumnRightClick() {
@@ -188,7 +193,12 @@ class TreeView extends Component {
   handleFilterChange = value => {
     this.props.onFilterChange(value);
 
-    console.log(this.props.filteredEntries);
+    console.log('CHANGE:', this.props.searchInArchive(value));
+    this.setState({
+      filteredEntries: this.props
+        .searchInArchive(value)
+        .map(value => value.entry._remoteObject)
+    });
   };
 
   handleSortModeChange = newMode => {
@@ -196,7 +206,8 @@ class TreeView extends Component {
   };
 
   render() {
-    const { groups, getEntries, filter, filteredEntries, t } = this.props;
+    const { groups, getEntries, filter, onSelectEntry } = this.props;
+    const { filteredEntries } = this.state;
 
     const loop = children => {
       if (!children) {
@@ -240,6 +251,7 @@ class TreeView extends Component {
           onChange={this.handleFilterChange}
           filter={filter}
           entries={filteredEntries}
+          onSelectEntry={onSelectEntry}
         />
       </SearchWrapper>
     );
@@ -256,18 +268,20 @@ class TreeView extends Component {
         }
         onContextMenu={() => this.handleColumnRightClick()}
       >
-        <Tree
-          draggable
-          showLine={false}
-          expandedKeys={this.props.expandedKeys}
-          selectedKeys={this.props.selectedKeys}
-          autoExpandParent={false}
-          onSelect={this.handleSelect}
-          onExpand={this.handleExpand}
-          onDrop={this.handleDrop}
-        >
-          {loop(groups)}
-        </Tree>
+        <div style={!filter ? {} : { opacity: 0.2 }}>
+          <Tree
+            draggable
+            showLine={false}
+            expandedKeys={this.props.expandedKeys}
+            selectedKeys={this.props.selectedKeys}
+            autoExpandParent={false}
+            onSelect={this.handleSelect}
+            onExpand={this.handleExpand}
+            onDrop={this.handleDrop}
+          >
+            {loop(groups)}
+          </Tree>
+        </div>
       </Column>
     );
   }
