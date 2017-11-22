@@ -34,7 +34,7 @@ i18n.init({
   fallbackLng: 'en',
   resources,
   react: {
-    wait: true
+    wait: false
   },
   ns: ['common'],
   defaultNS: 'common',

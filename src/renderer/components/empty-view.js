@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import i18n from '../../shared/i18n';
 import { translate, Trans, Interpolate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
@@ -44,6 +45,37 @@ const Title = styled.h3`
   margin-bottom: var(--spacing-half);
 `;
 
+class Translate extends Component {
+  static propTypes = {
+    i18nKey: PropTypes.string,
+    parent: PropTypes.string,
+    defaultText: PropTypes.string,
+    values: PropTypes.object
+  };
+
+  interpolation(str, values) {
+    return str.replace(/\{\{(.*?)\}\}/g, (a, b) => values[b] || '');
+  }
+
+  render() {
+    const {
+      parent: Parent = 'span',
+      i18nKey,
+      values,
+      defaultText
+    } = this.props;
+    const translatedText = i18n.t(i18nKey, values);
+    return (
+      <Parent>
+        {translatedText === i18nKey
+          ? this.interpolation(defaultText, values)
+          : translatedText}
+      </Parent>
+    );
+  }
+}
+
+let interpolateComponent = <strong>a interpolated component</strong>;
 const NoArchiveSelectedView = ({ t }) => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
@@ -57,9 +89,16 @@ const NoArchiveSelectedView = ({ t }) => (
         <Interpolate
           i18nKey="unlock-archive"
           os={`${isOSX() ? '⌘' : 'Ctrl'}+1`}
-        >
-          Unlock an archive to begin ({`${isOSX() ? '⌘' : 'Ctrl'}+1`}).
-        </Interpolate>
+          component={interpolateComponent}
+        />
+
+        <Translate
+          i18nKey="unlock-archive"
+          values={{
+            os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
+          }}
+          defaultText="Welcome back to Buttercup. {{os}}"
+        />
       </Caption>
     </Figure>
   </ColoredFlex>

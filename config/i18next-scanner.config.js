@@ -13,7 +13,7 @@ module.exports = {
   options: {
     debug: true,
     func: {
-      list: ['i18next.t', 'i18n.t']
+      list: ['i18next.t', 'i18n.t', 'this.prop.t']
     },
     lngs: ['en', 'de', 'fr', 'ru', 'es'],
     ns: ['translation'],
