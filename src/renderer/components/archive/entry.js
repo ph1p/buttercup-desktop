@@ -8,7 +8,7 @@ import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
 import EmptyView from '../../containers/empty-view';
-import bench from '../../styles/img/bench.png';
+import bench from '../../styles/img/bench.svg';
 import EntryView from './entry-view';
 
 class Entry extends Component {
