@@ -2,10 +2,13 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import { getSetting } from '../selectors';
 
 // add all locales
-import de from 'locales/de';
-import en from 'locales/en';
-import es from 'locales/es';
-import fr from 'locales/fr';
+import german from 'locales/de';
+import english from 'locales/en';
+import spanish from 'locales/es';
+import french from 'locales/fr';
+import russian from 'locales/ru';
+import italian from 'locales/it';
+import farsi from 'locales/fa';
 
 // configuration
 const config = {
@@ -14,22 +17,37 @@ const config = {
     {
       name: 'English',
       code: 'en',
-      messages: en
+      messages: english
     },
     {
       name: 'Deutsch',
       code: 'de',
-      messages: de
+      messages: german
     },
     {
       name: 'Español',
       code: 'es',
-      messages: es
+      messages: spanish
     },
     {
       name: 'Français',
       code: 'fr',
-      messages: fr
+      messages: french
+    },
+    {
+      name: 'Русский',
+      code: 'ru',
+      messages: russian
+    },
+    {
+      name: 'Italiano',
+      code: 'it',
+      messages: italian
+    },
+    {
+      name: 'Persian (فارسی)',
+      code: 'fa',
+      messages: farsi
     }
   ]
 };
@@ -50,7 +68,7 @@ const getTranslationsByLangCode = langCode =>
  */
 const i18n = {
   provider: null,
-  locale: '',
+  locale: config.defaultLanguage,
   translations: {},
   /**
    * Setup language
