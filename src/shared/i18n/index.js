@@ -1,31 +1,40 @@
 import i18n from 'i18next';
+import Translate from './translate';
 
 export const languages = {
   en: {
     name: 'English',
-    common: require('locales/en/translation.json')
+    base: require('locales/en/base.json')
   },
   de: {
     name: 'Deutsch',
-    common: require('locales/de/translation.json')
+    base: require('locales/de/base.json')
   },
   es: {
     name: 'Español',
-    common: require('locales/es/translation.json')
+    base: require('locales/es/base.json')
   },
   fr: {
     name: 'Français',
-    common: require('locales/fr/translation.json')
+    base: require('locales/fr/base.json')
   },
   ru: {
     name: 'Русский',
-    common: require('locales/ru/translation.json')
+    base: require('locales/ru/base.json')
+  },
+  it: {
+    name: 'Italiano',
+    base: require('locales/it/base.json')
+  },
+  fa: {
+    name: 'Persian (فارسی)',
+    base: require('locales/fa/base.json')
   }
 };
 
 const resources = Object.keys(languages).reduce((accumulator, key) => {
   accumulator[key] = {
-    common: languages[key].common
+    base: languages[key].base
   };
   return accumulator;
 }, {});
@@ -34,13 +43,17 @@ i18n.init({
   fallbackLng: 'en',
   resources,
   react: {
-    wait: true
+    wait: false
   },
-  ns: ['common'],
-  defaultNS: 'common',
-  keySeparator: '>',
-  nsSeparator: '|',
+  ns: ['base'],
+  defaultNS: 'base',
+  nsSeparator: ':',
+  keySeparator: '.',
+  pluralSeparator: '_',
+  contextSeparator: '-',
   debug: false
 });
+
+export { Translate };
 
 export default i18n;

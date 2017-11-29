@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import { translate, Interpolate } from 'react-i18next';
+import { Translate } from '../../shared/i18n';
 import spinner from '../styles/img/spinner.svg';
 
 const SavingDialog = styled(Flex)`
@@ -53,16 +53,11 @@ class SavingModal extends Component {
       <SavingDialog align="center" justify="center">
         <SavingDialogText>
           <img width="64" src={spinner} alt="Loading" />
-          <Interpolate
-            useDangerouslySetInnerHTML
-            i18nKey="archive-saved-loading-info"
-            parent="p"
-          >
-            Your archive is being saved.<br />Exiting automatically
-          </Interpolate>
+          <br />
+          <Translate html i18nKey="archive-saved-loading-info" />
         </SavingDialogText>
       </SavingDialog>
     );
   }
 }
-export default translate()(SavingModal);
+export default SavingModal;

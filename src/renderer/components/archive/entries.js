@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
+import { Translate } from '../../../shared/i18n';
 import { isOSX } from '../../../shared/utils/platform';
 import {
   showContextMenu,
@@ -12,9 +13,11 @@ import {
 } from '../../system/menu';
 import BaseColumn from '../column';
 import List from './entries-list';
+import SearchField from './search-field';
+import SortButton from './sort-button';
 
 const Column = styled(BaseColumn)`
-  background-color: ${'var(--entries-bg)'};
+  background-color: ${isOSX() ? 'var(--entries-bg-mac)' : 'var(--entries-bg)'};
   color: #fff;
 `;
 
@@ -30,15 +33,27 @@ const SearchWrapper = styled.div`
 
 class Entries extends Component {
   static propTypes = {
+    filter: PropTypes.string,
+    sortMode: PropTypes.string,
     entries: PropTypes.array,
     groups: PropTypes.array,
     currentEntry: PropTypes.object,
     currentGroup: PropTypes.object,
     onSelectEntry: PropTypes.func,
+    onFilterChange: PropTypes.func,
+    onSortModeChange: PropTypes.func,
     onEntryMove: PropTypes.func,
     onDelete: PropTypes.func,
     handleAddEntry: PropTypes.func,
     t: PropTypes.func
+  };
+
+  handleFilterChange = value => {
+    this.props.onFilterChange(value);
+  };
+
+  handleSortModeChange = newMode => {
+    this.props.onSortModeChange(newMode);
   };
 
   onRightClick(entry) {
@@ -69,8 +84,7 @@ class Entries extends Component {
   }
 
   render() {
-    const { currentGroup, handleAddEntry, onDelete } = this.props;
-
+    const { currentGroup, handleAddEntry, sortMode, filter } = this.props;
     const addButton = (
       <Button
         onClick={handleAddEntry}
@@ -79,16 +93,19 @@ class Entries extends Component {
         dark
         icon={<PlusIcon />}
       >
-        <Trans i18nKey="add-entry" parent="span">
-          Add Entry
-        </Trans>
+        <Translate i18nKey="add-entry" parent="span" />
       </Button>
+    );
+    const filterNode = (
+      <SearchWrapper>
+        <SearchField onChange={this.handleFilterChange} filter={filter} />
+        <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
+      </SearchWrapper>
     );
 
     return (
-      <Column footer={addButton}>
+      <Column header={filterNode} footer={addButton}>
         <List
-          onDelete={onDelete}
           entries={this.props.entries}
           currentEntry={this.props.currentEntry}
           onSelectEntry={this.props.onSelectEntry}
