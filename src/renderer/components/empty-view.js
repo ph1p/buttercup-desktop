@@ -44,7 +44,7 @@ EmptyView.propTypes = {
 export default EmptyView;
 
 const ColoredFlex = styled(Flex)`
-  background-color: RGBA(20, 20, 20, 0.8);
+  background-color: rgb(20, 20, 20);
   color: #fff;
 `;
 

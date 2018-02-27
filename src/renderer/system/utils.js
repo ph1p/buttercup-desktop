@@ -27,11 +27,8 @@ export function selectElementContents(el) {
   sel.addRange(range);
 }
 
-export function setWindowSize(width, height, vibrancy) {
+export function setWindowSize(width, height) {
   currentWindow.setSize(width, height, false);
-  if (typeof vibrancy !== 'undefined') {
-    currentWindow.setVibrancy(vibrancy);
-  }
 }
 
 export function isButtercupFile(filePath) {

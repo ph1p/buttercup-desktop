@@ -79,12 +79,12 @@ input, button, textarea, :focus {
   --sidebar-width: 250px;
   --sidebar-width-condenced: 75px;
   --form-input-height: 35px;
-  --sidebar-bg: RGBA(33, 37, 43, .9);
+  --sidebar-bg: rgb(33, 37, 43);
   --groups-bg: #292C33;
-  --groups-bg-mac: rgba(0,0,0,.2);
+  --groups-bg-mac: rgb(29, 32, 37);
   --entries-bg: #31353D;
   /*--entries-bg-mac: rgba(49, 53, 61, 0.4);*/
-  --entries-bg-mac: rgba(0, 0, 0, .35);
+  --entries-bg-mac: rgb(27, 30, 36);
   --red: #EB5767;
   --gray-light: #F5F7FA;
   --gray: #E4E9F2;

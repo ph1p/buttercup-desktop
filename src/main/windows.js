@@ -29,8 +29,7 @@ export function setupWindows(store) {
       frame: !isOSX(),
       transparent: isOSX() && isHighSierra(),
       show: process.env.NODE_ENV === 'development',
-      darkTheme: true,
-      vibrancy: 'ultra-dark'
+      darkTheme: true
     });
 
     // set window position only if config exists
