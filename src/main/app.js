@@ -13,6 +13,7 @@ import { isWindows, isOSX } from '../shared/utils/platform';
 import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
+import { setupNetwork } from './network';
 import { getFilePathFromArgv } from './utils/argv';
 import { getSetting } from '../shared/selectors';
 
@@ -131,6 +132,7 @@ app.on('ready', async () => {
   setupActions(store);
   setupMenu(store);
   setupTrayIcon(store);
+  setupNetwork(store);
 
   appIsReady = true;
 

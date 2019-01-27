@@ -34,6 +34,8 @@ const DEFAULT_SETTINGS = {
   archivesLoading: false,
   isTrayIconEnabled: true,
   isBrowserAccessEnabled: false,
+  proxyUrl: '',
+  proxyPort: '',
   locale: ''
 };
 
