@@ -1,5 +1,7 @@
+import Dropbox from 'dropbox';
 import { remote } from 'electron';
 import webdavFs from 'webdav-fs';
+import fetch from 'electron-fetch';
 import dropboxFs from 'dropbox-fs';
 import anyFs from 'any-fs';
 
@@ -57,7 +59,10 @@ export function getFsInstance(type, settings) {
     case 'dropbox':
       return anyFs(
         dropboxFs({
-          apiKey: settings.token
+          client: new Dropbox({
+            accessToken: settings.token,
+            fetch
+          })
         })
       );
     case 'webdav':

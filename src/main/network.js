@@ -1,50 +1,54 @@
-import { ipcMain as ipc, BrowserWindow } from 'electron';
-import fetch from 'node-fetch';
+import { ipcMain as ipc, BrowserWindow, session } from 'electron';
 import { Buffer } from 'buffer';
-import HttpsProxyAgent from 'https-proxy-agent';
 import log from 'electron-log';
 import { getSetting } from '../shared/selectors';
+import fetch from 'electron-fetch';
 
 export function setupNetwork(store) {
+  const state = store.getState();
+
+  const proxySchema = getSetting(state, 'proxySchema');
+  const proxyUrl = getSetting(state, 'proxyUrl');
+  const proxyPort = getSetting(state, 'proxyPort');
+
+  const ses = session.defaultSession;
+  if (proxyUrl && proxyPort) {
+    const url = `${proxySchema}=${proxyUrl}:${proxyPort}`;
+
+    ses.setProxy(
+      {
+        proxyRules: url,
+        proxyBypassRules: 'localhost'
+      },
+      d => {
+        console.log('USING PROXY: ', url);
+      }
+    );
+  }
+
   ipc.on('nw-request', async (e, { url, type, id }) => {
     if (!id) {
       throw new Error('Request needs an id!');
     }
     const win = BrowserWindow.getFocusedWindow();
 
-    const state = store.getState();
-
-    const proxyUrl = getSetting(state, 'proxyUrl');
-    const proxyPort = getSetting(state, 'proxyPort');
-
-    const proxy =
-      process.env.http_proxy ||
-      (proxyUrl && proxyPort ? 'https://' + proxyUrl + ':' + proxyPort : '');
-
-    let options = {};
-
     log.info('URL: %j', url);
-    if (proxy) {
-      log.info('using proxy server %j', proxy);
-      options = {
-        ...options,
-        agent: new HttpsProxyAgent(proxy)
-      };
-    }
 
-    try {
-      const res = await fetch(url, options);
-      let response = res.body;
+    if (win) {
+      try {
+        const res = await fetch(url);
+        let response = res.body;
 
-      if (type === 'text') {
-        response = await res.text();
-      } else if (type === 'buffer') {
-        response = Buffer.from(await res.arrayBuffer());
+        if (type === 'text') {
+          response = await res.text();
+        } else if (type === 'buffer') {
+          response = Buffer.from(await res.arrayBuffer());
+        }
+
+        win.webContents.send('nw-response-' + id, response);
+      } catch (e) {
+        win.webContents.send('nw-response-' + id, null);
       }
-
-      win.webContents.send('nw-response-' + id, response);
-    } catch (e) {
-      win.webContents.send('nw-response-' + id, null);
     }
   });
 }

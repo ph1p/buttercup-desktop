@@ -27,7 +27,7 @@ export function settingsByArchiveId(state = {}, action) {
   return state;
 }
 
-const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
   condencedSidebar: true,
   menubarAutoHide: false,
@@ -36,6 +36,7 @@ const DEFAULT_SETTINGS = {
   isBrowserAccessEnabled: false,
   proxyUrl: '',
   proxyPort: '',
+  proxySchema: 'https',
   locale: ''
 };
 

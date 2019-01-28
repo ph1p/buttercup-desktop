@@ -1,10 +1,11 @@
 import Buttercup from 'buttercup/dist/buttercup-web.min';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
-import i18n from '../shared/i18n';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
+import fetch from 'electron-fetch';
 import { AppContainer } from 'react-hot-loader';
+import i18n from '../shared/i18n';
 import configureStore from '../shared/store/configure-store';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
 import {
@@ -34,7 +35,7 @@ unhandled();
 
 // Alter some Buttercup internals
 Buttercup.Web.HashingTools.patchCorePBKDF();
-Buttercup.vendor.webdav.setFetchMethod(window.fetch);
+Buttercup.vendor.webdav.setFetchMethod(fetch);
 
 // Create store
 const store = configureStore({}, 'renderer');
